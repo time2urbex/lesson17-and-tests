@@ -3,7 +3,7 @@ import sys
 import solution
 import unittest
 from pathlib import Path
-from flask_restx import Api, Resource, Namespace
+from flask_restx import Api, Namespace
 
 BASENAME = 'lesson17-and-tests'
 cwd = Path.cwd()

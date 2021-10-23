@@ -83,10 +83,10 @@ class NoteView(Resource):
 
 # # # # # # # # # # # #
 if __name__ == '__main__':
-    client = app.test_client()                          # TODO вы можете раскомментировать   
-    # response = client.put('/notes/1', json=PUT)       # соответсвующе функции и  
-    # response = client.patch('/notes/1', json=PATCH)   # воспользоваться ими для самопроверки   
-    # response = client.delete('/notes/1', json='')     # аналогично заданию `post_with_db`   
+    client = app.test_client()                          # TODO вы можете раскомментировать
+    # response = client.put('/notes/1', json=PUT)       # соответсвующе функции и
+    # response = client.patch('/notes/1', json=PATCH)   # воспользоваться ими для самопроверки
+    # response = client.delete('/notes/1', json='')     # аналогично заданию `post_with_db`
     session = db.session()
     cursor = session.execute("SELECT * FROM note").cursor
     mytable = prettytable.from_db_cursor(cursor)
