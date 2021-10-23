@@ -1,7 +1,6 @@
 import main
 import unittest
 import solution
-from tools import SkyproTestCase
 from pathlib import Path
 import sys
 

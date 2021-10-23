@@ -2,7 +2,6 @@ import main
 import sys
 import solution
 import unittest
-from tools import SkyproTestCase
 from pathlib import Path
 
 BASENAME = 'lesson17-and-tests'

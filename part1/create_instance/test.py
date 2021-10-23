@@ -3,7 +3,6 @@ import sys
 import solution
 import unittest
 from flask_sqlalchemy import SQLAlchemy
-from tools import SkyproTestCase
 from pathlib import Path
 from sqlalchemy import text
 

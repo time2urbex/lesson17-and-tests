@@ -181,26 +181,26 @@ class ResponseTestsMixin:
                 response.status_code, [405],
                 (f"%@Проверьте, что при {method}-запросе на адрес "
                  f"{url} используется правильный http-метод"))
-        self.assertTrue(
-            response.is_json,
-            (f"%@Проверьте, что в ответ на {method}-запрос "
-             f"по адресу {url} возращает данные в формате json."
-             " Попробуйте использовать функцию jsonify из библиотеки flask."))
+        # self.assertTrue(  # json_fix
+        #     response.is_json,
+        #     (f"%@Проверьте, что в ответ на {method}-запрос "
+        #      f"по адресу {url} возращает данные в формате json."
+        #      " Попробуйте использовать функцию jsonify из библиотеки flask."))        
         if expected:
-            data = response.json
+            expected_json = response.json or json.loads(response.data)  # json_fix
             self.assertFalse(
-                response.json == {},
+                expected_json == {},
                 (f"%@Проверьте что в ответ на {method}-запрос по адресу {url} "
                  f"возвращается не пустой ответ")
             )
             self.assertTrue(
-                isinstance(data, expected),
+                isinstance(expected_json, expected),
                 f"%@Проверьте что в ответ на {method}-запрос по адресу {url}"
-                f"возвращается {expected}"
+                f" возвращается {expected}"
             )
         else:
-            self.assertEqual(
-                response.json, '',
+            self.assertTrue(
+                response.data == b'' or response.json == '',
                 f"%@Проверьте что в ответ на {method}-запрос по адресу {url}"
                 f" возвращается пустое значение."
             )
@@ -211,8 +211,8 @@ class ResponseTestsMixin:
             **kwargs):
         """
         Compare student response.data with author sulution.
-        Note:* (response.data must be not None)
-        use `many=true` for inspecting response.data which contains list
+        - Note:* (response.data must be not None)
+        - Use `many=true` for inspecting response.data which contains list
         """
         self._required_args_checker(
             'method',
@@ -222,21 +222,31 @@ class ResponseTestsMixin:
             **kwargs)
         method = kwargs.get('method')
         url = kwargs.get('url')
-        student_response = kwargs.get('student_response').json
+        student_response = kwargs.get('student_response')
+        student_response = student_response.json or json.loads(
+            student_response.data)  # json_fix
         author_response = kwargs.get('author_response').json
-        if not many and isinstance(author_response, list):
-            raise ValueError('check `response.data` maybe many arg must have True value')
-        # if not many:
-        #     self.assertFalse(
-        #         isinstance(student_response, list),
-        #         (f"%@Проверьте, что при {method}-запросе на адрес {url} "
-        #          f"ответ возвращается в формате  "))
+        if author_response == '':
+            raise ValueError("In this Case response returns None"
+                             " so no one field can be checked, "
+                             "delete this function from testCase")
         if many:
             author_data = author_response[0]
             data = student_response[0]
         else:
             author_data = author_response
             data = student_response
+        if (author_data == data == []           # Ecли ответ будет пустым тогда
+                or author_data == data == {}):  # поля не проверять
+            return                              # заканчиваем проверку здесь
+        if not many and isinstance(author_response, list):
+            raise ValueError('check `response.data` maybe many'
+                             ' arg must have True value')
+        if not many:
+            self.assertFalse(
+                isinstance(student_response, list),
+                (f"%@Проверьте, что при {method}-запросе на адрес {url} "
+                 f"ответ возвращается {dict}"))
         student_keys = data.keys()
         for key, value in author_data.items():
             self.assertIn(

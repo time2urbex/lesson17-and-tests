@@ -6,9 +6,8 @@
 
 
 # Исходный код
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow import Schema, fields
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -26,11 +25,7 @@ class Book(db.Model):
     year = db.Column(db.Integer)
 
 
-class BookSchema(Schema):            # ВОПРОС! непонятно по заданию
-    id = fields.Int()                # здесь студент сам пишет схему
-    name = fields.Str()              # или она доступна по условию задачи
-    author = fields.Str()            # Тесты для данного блока на всякий случай
-    year = fields.Int()              # готовы
+# TODO определите здесь схему сериализации
 
 # С помощью данного отрезка кода мы создаём
 # таблицу во временной базе данных и добавляем
@@ -47,7 +42,6 @@ with db.session.begin():
 # ######
 
 # TODO напишите роут здесь
-# @app.route(". . .")
 
 
 # чтобы проверить результат работы

@@ -3,6 +3,7 @@ import sys
 import solution
 import unittest
 from pathlib import Path
+from flask_restx import Api, Resource, Namespace
 
 BASENAME = 'lesson17-and-tests'
 cwd = Path.cwd()
@@ -24,17 +25,29 @@ class SerializationTestCase(SkyproTestCase,
         self.student_app = main.app.test_client()
         self.author_app = solution.app.test_client()
 
-    def test_role_schema_is_valid(self):
-        self.schema_is_valid(
-            main=main,
-            schema_name='BookSchema')
+    def test_module_have_api_instance(self):
+        self.assertTrue(
+            hasattr(main, 'api'),
+            '%@Проверьте, что переменная api существует в модуле'
+        )
+        self.assertTrue(
+            isinstance(main.api, Api),
+            f"%@Проверьте, что переменная api является "
+            f"экземпляром класса {Api}"
+        )
 
-    def test_role_schema_names_and_types_is_valid(self):
-        self.compare_schema_with_author_solution(
-            student_schema=main.BookSchema,
-            author_schema=solution.BookSchema)
+    def test_module_have_books_ns_variable(self):
+        self.assertTrue(
+            hasattr(main, 'book_ns'),
+            '%@Проверьте что переменная books_ns существует'
+        )
+        self.assertTrue(
+            isinstance(main.book_ns, Namespace),
+            "%@Проверьте что переменная books_ns создана с помощью"
+            "функции namespace"
+        )
 
-    def test_viev_books_is_available_and_works_correct(self):
+    def test_view_books_is_available_and_works_correct(self):
         url = "/books/"
         test_options = {
             "url": url,
