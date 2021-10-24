@@ -60,16 +60,16 @@ with db.session.begin():
 
 
 # TODO Допишите Class Based View здесь
-@ 
-class ...
-    def put(self, uid):
-        pass
+# @ 
+# class ...
+#     def put(self, uid):
+#         pass
 
-    def patch(self, uid):
-        pass
+#     def patch(self, uid):
+#         pass
 
-    def delete(self, uid):
-        pass
+#     def delete(self, uid):
+#         pass
 
 
 # # # # # # # # # # # #
