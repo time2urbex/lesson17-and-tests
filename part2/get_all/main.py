@@ -17,7 +17,7 @@ from flask import Flask
 app = Flask(__name__)
 
 api = # TODO допишите код
-note_ns = # TODO допишите код
+book_ns = # TODO допишите код
 
 books = [
     {
