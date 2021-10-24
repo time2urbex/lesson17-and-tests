@@ -39,11 +39,11 @@ class SerializationTestCase(SkyproTestCase,
     def test_module_have_books_ns_variable(self):
         self.assertTrue(
             hasattr(main, 'book_ns'),
-            '%@Проверьте что переменная books_ns существует'
+            '%@Проверьте что переменная book_ns существует'
         )
         self.assertTrue(
             isinstance(main.book_ns, Namespace),
-            "%@Проверьте что переменная books_ns создана с помощью"
+            "%@Проверьте что переменная book_ns создана с помощью"
             "функции namespace"
         )
 
