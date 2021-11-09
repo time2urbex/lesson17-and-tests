@@ -3,8 +3,9 @@ import unittest
 import solution
 from pathlib import Path
 import sys
+import os
 
-BASENAME = 'lesson17-and-tests'
+BASENAME = Path(os.path.abspath(__file__)).parent.parent.parent.name
 cwd = Path.cwd()
 parts = cwd.parts
 basefolder_index = parts.index(BASENAME)

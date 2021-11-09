@@ -5,8 +5,9 @@ import unittest
 from flask_sqlalchemy import SQLAlchemy
 from pathlib import Path
 from sqlalchemy import text
+import os
 
-BASENAME = 'lesson17-and-tests'
+BASENAME = Path(os.path.abspath(__file__)).parent.parent.parent.name
 cwd = Path.cwd()
 parts = cwd.parts
 basefolder_index = parts.index(BASENAME)
