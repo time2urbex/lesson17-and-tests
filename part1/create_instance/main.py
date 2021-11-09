@@ -21,7 +21,10 @@ class Role(db.Model):
 
 db.create_all()
 
-# TODO напишите схему здесь
+
+class RoleSchema:
+    # TODO напишите схему здесь
+    pass
 
 
 def create(data):

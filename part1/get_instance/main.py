@@ -31,8 +31,10 @@ class Book(db.Model):
     author = db.Column(db.String(100))
     year = db.Column(db.Integer)
 
-# TODO определите здесь схему
-# marshmallow для сериализации данных
+
+class BookSchema:
+    # TODO определите здесь схему
+    pass
 
 
 b1 = Book(id=1, name="Гарри Поттер",            # Данный отрезок кода
