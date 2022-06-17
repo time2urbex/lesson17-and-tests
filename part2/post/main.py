@@ -21,7 +21,9 @@
 
 from flask import Flask
 from pprint import pprint
+
 app = Flask(__name__)
+app. config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 
 api = # TODO допишите код
 note_ns = # TODO допишите код

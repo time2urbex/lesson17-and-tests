@@ -10,6 +10,7 @@ PUT = {
 PATCH = {"text": "Note, that newer then last one"}
 
 app = Flask(__name__)
+app. config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 
 api = Api(app)
 note_ns = api.namespace('notes')

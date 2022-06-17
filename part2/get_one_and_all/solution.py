@@ -6,7 +6,7 @@ from marshmallow import Schema, fields
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JSON_AS_ASCII'] = False
+app. config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 db = SQLAlchemy(app)
 
 

@@ -28,6 +28,7 @@ from pprint import pprint
 app = Flask(__name__)
 
 api = Api(app)
+app. config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 
 api = # TODO допишите код
 note_ns = # TODO допишите код

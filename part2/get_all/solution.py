@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restx import Api, Resource
 
 app = Flask(__name__)
+app. config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 
 api = Api(app)
 book_ns = api.namespace('books')
