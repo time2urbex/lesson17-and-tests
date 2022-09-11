@@ -6,10 +6,9 @@
 #    "name": "buratino",
 #    "id": 1
 # }
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow import Schema
+from marshmallow import Schema, fields
 import json
 
 app = Flask(__name__)
@@ -34,13 +33,14 @@ with db.session.begin():
 
 
 class RoleSchema(Schema):
-    # TODO напишите схему здесь
-    pass
+    id = fields.Int()
+    name = fields.Str()
 
 
 def serialize():
-    # TODO реализуйте сериализацию здесь
-    pass
+    role_schema = RoleSchema()
+    result = Role.query.get(1)
+    return role_schema.dump(result)
 
 
 if __name__ == "__main__":

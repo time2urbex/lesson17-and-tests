@@ -10,9 +10,9 @@
 #      "author": "narod",
 #      "year": 1999
 #    }
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields
 import json
 
 app = Flask(__name__)
@@ -39,18 +39,18 @@ with db.session.begin():
     db.session.add(book)
 
 
-class BookSchema:
-    # TODO напишите схему здесь
-    pass
+class BookSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+    author = fields.Str()
+    year = fields.Int()
 
 
 def serialize():
     book_schema = BookSchema()
     result = Book.query.get(1)
-    return book_schema.dumps(result)
+    return book_schema.dump(result)
 
-
-# данный код нужен для отображения результата запроса
 
 if __name__ == "__main__":
     print(json.dumps(serialize(), indent=4))

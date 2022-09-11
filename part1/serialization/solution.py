@@ -31,8 +31,8 @@ class RoleSchema(Schema):
 
 def serialize():
     role_schema = RoleSchema()
-    r1 = Role.query.get(1)
-    return role_schema.dump(r1)
+    result = Role.query.get(1)
+    return role_schema.dump(result)
 
 
 if __name__ == "__main__":
